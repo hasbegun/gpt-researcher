@@ -76,9 +76,9 @@ class ConfigRequest(BaseModel):
 app = FastAPI()
 
 # Static files and templates
-app.mount("/site", StaticFiles(directory="./frontend"), name="site")
-app.mount("/static", StaticFiles(directory="./frontend/static"), name="static")
-templates = Jinja2Templates(directory="./frontend")
+# app.mount("/site", StaticFiles(directory="./frontend"), name="site")
+# app.mount("/static", StaticFiles(directory="./frontend/static"), name="static")
+# templates = Jinja2Templates(directory="./frontend")
 
 # WebSocket manager
 manager = WebSocketManager()
@@ -103,14 +103,15 @@ def startup_event():
     os.makedirs("outputs", exist_ok=True)
     app.mount("/outputs", StaticFiles(directory="outputs"), name="outputs")
     # os.makedirs(DOC_PATH, exist_ok=True)  # Commented out to avoid creating the folder if not needed
-    
+
 
 # Routes
-
-
+# @app.get("/")
+# async def read_root(request: Request):
+#     return templates.TemplateResponse("index.html", {"request": request, "report": None})
 @app.get("/")
 async def read_root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request, "report": None})
+    return {"message": "Welcome to GPT Researcher"}
 
 
 @app.get("/report/{research_id}")
