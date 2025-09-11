@@ -37,7 +37,7 @@ const InputArea: FC<TInputAreaProps> = ({
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const placeholder = handleSecondary
     ? "Any questions about this report?"
-    : "What would you like me to research next?";
+    : "What would you research?";
 
   const resetHeight = () => {
     if (textareaRef.current) {
@@ -92,8 +92,8 @@ const InputArea: FC<TInputAreaProps> = ({
       <textarea
         placeholder={placeholder}
         ref={textareaRef}
-        className="focus-visible::outline-0 my-1 w-full pl-5 font-light not-italic leading-[normal] 
-        text-[#1B1B16]/30 text-black outline-none focus-visible:ring-0 focus-visible:ring-offset-0 
+        className="focus-visible::outline-0 my-1 w-full pl-5 font-light not-italic leading-[normal]
+        text-[#1B1B16]/30 text-black outline-none focus-visible:ring-0 focus-visible:ring-offset-0
         sm:text-xl min-h-[4em] resize-none"
         disabled={disabled}
         value={promptValue}
