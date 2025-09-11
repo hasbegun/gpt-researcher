@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
-import React, { FC, useRef } from "react";
+import React, { FC, useRef, useState, useEffect } from "react";
 import TypeAnimation from "../../TypeAnimation";
+import { useTranslation } from 'react-i18next';
 
 type TInputAreaProps = {
   promptValue: string;
@@ -34,10 +37,21 @@ const InputArea: FC<TInputAreaProps> = ({
   reset,
   isStopped,
 }) => {
+  const { t } = useTranslation();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const placeholder = handleSecondary
-    ? "Any questions about this report?"
-    : "What would you research?";
+
+  // Use a state variable for the placeholder to handle hydration
+  const [placeholderText, setPlaceholderText] = useState("");
+
+  useEffect(() => {
+    // This code runs only on the client after hydration
+    // It will set the correct, translated placeholder text
+    setPlaceholderText(
+      handleSecondary
+        ? "Any questions about this report?"
+        : t('question')
+    );
+  }, [t, handleSecondary]); // Re-run effect if translation function or secondary handler changes
 
   const resetHeight = () => {
     if (textareaRef.current) {
@@ -90,7 +104,7 @@ const InputArea: FC<TInputAreaProps> = ({
       }}
     >
       <textarea
-        placeholder={placeholder}
+        placeholder={placeholderText} // Use the state variable here
         ref={textareaRef}
         className="focus-visible::outline-0 my-1 w-full pl-5 font-light not-italic leading-[normal]
         text-[#1B1B16]/30 text-black outline-none focus-visible:ring-0 focus-visible:ring-offset-0
@@ -128,3 +142,13 @@ const InputArea: FC<TInputAreaProps> = ({
 };
 
 export default InputArea;
+
+const LoadingDots = ({ color = "#fff", style = "default" }) => {
+  return (
+    <span className={style === "dark" ? "loading-dots-dark" : "loading-dots"}>
+      <span style={{ backgroundColor: color }} />
+      <span style={{ backgroundColor: color }} />
+      <span style={{ backgroundColor: color }} />
+    </span>
+  );
+};
