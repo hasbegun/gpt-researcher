@@ -22,38 +22,38 @@ const Hero: FC<THeroProps> = ({
     setIsVisible(true);
 
     // Create particles for the background effect
-    if (particlesContainerRef.current) {
-      const container = particlesContainerRef.current;
-      const particleCount = window.innerWidth < 768 ? 15 : 30; // Reduce particles on mobile
+    // if (particlesContainerRef.current) {
+    //   const container = particlesContainerRef.current;
+    //   const particleCount = window.innerWidth < 768 ? 15 : 30; // Reduce particles on mobile
 
-      // Clear any existing particles
-      container.innerHTML = '';
+    //   // Clear any existing particles
+    //   container.innerHTML = '';
 
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
+    //   for (let i = 0; i < particleCount; i++) {
+    //     const particle = document.createElement('div');
 
-        // Random particle attributes
-        const size = Math.random() * 4 + 1;
-        const posX = Math.random() * 100;
-        const posY = Math.random() * 100;
-        const duration = Math.random() * 50 + 20;
-        const delay = Math.random() * 5;
-        const opacity = Math.random() * 0.3 + 0.1;
+    //     // Random particle attributes
+    //     const size = Math.random() * 4 + 1;
+    //     const posX = Math.random() * 100;
+    //     const posY = Math.random() * 100;
+    //     const duration = Math.random() * 50 + 20;
+    //     const delay = Math.random() * 5;
+    //     const opacity = Math.random() * 0.3 + 0.1;
 
-        // Apply styles
-        particle.className = 'absolute rounded-full bg-white';
-        Object.assign(particle.style, {
-          width: `${size}px`,
-          height: `${size}px`,
-          left: `${posX}%`,
-          top: `${posY}%`,
-          opacity: opacity.toString(),
-          animation: `float ${duration}s ease-in-out ${delay}s infinite`,
-        });
+    //     // Apply styles
+    //     particle.className = 'absolute rounded-full bg-white';
+    //     Object.assign(particle.style, {
+    //       width: `${size}px`,
+    //       height: `${size}px`,
+    //       left: `${posX}%`,
+    //       top: `${posY}%`,
+    //       opacity: opacity.toString(),
+    //       animation: `float ${duration}s ease-in-out ${delay}s infinite`,
+    //     });
 
-        container.appendChild(particle);
-      }
-    }
+    //     container.appendChild(particle);
+    //   }
+    // }
 
     // Add scroll event listener to show/hide gradient
     let lastScrollY = window.scrollY;
